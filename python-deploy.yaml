@@ -16,7 +16,7 @@ spec:
         app: mariadb
     spec:
       containers:
-      - image: py-maria:latest
+      - image: shahnavedali/valley:latest
         name: py-maria
         env:
         - name: ENV_USER
