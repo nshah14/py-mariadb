@@ -39,6 +39,12 @@ spec:
         volumeMounts:
         - name: mariadb-persistent-storage
           mountPath: /var/lib/mariadb
+        livenessProbe:
+          tcpSocket:
+            port: 3306
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        
       volumes:
       - name: mariadb-persistent-storage
         persistentVolumeClaim:
