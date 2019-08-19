@@ -33,11 +33,6 @@ spec:
             secretKeyRef:
               name: mysecret
               key: username
-        - name: SECRET_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysecret
-              key: password
         ports:
         - containerPort: 3306
           name: mariadb
