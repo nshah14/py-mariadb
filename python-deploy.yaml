@@ -19,7 +19,17 @@ spec:
       - image: py-maria:latest
         name: py-maria
         env:
-        - name: MYSQL_ROOT_PASSWORD
+        - name: ENV_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: username 
+        - name: ENV_DB
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: dbname  
+        - name: ENV_PASS
           valueFrom:
             secretKeyRef:
               name: mysecret
