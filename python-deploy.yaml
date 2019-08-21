@@ -28,9 +28,11 @@ spec:
         app: mariadb
     spec:
       containers:
-      - image: shahnavedali/valley:2.0
+      - image: shahnavedali/valley:3.0
         name: py-maria
         env:
+        - name: MARIA_DB_HOST
+          value: mariadb
         - name: ENV_USER
           valueFrom:
             secretKeyRef:

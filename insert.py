@@ -7,6 +7,7 @@ import os
 ENV_USER=os.environ['ENV_USER']
 ENV_PASS=os.environ['ENV_PASS']
 ENV_DB=os.environ['ENV_DB']
+MARIA_DB_HOST=os.environ['MARIA_DB_HOST']
 
 
 def main(argv):
@@ -52,7 +53,8 @@ def connect_maria_db():
      print 'ENV_USER ', ENV_USER
      print 'ENV_PASS ', ENV_PASS
      print 'ENV_DB', ENV_DB
-     mariadb_connection = mariadb.connect(user=ENV_USER, password=ENV_PASS, database=ENV_DB)
+     print 'MARIA_DB_HOST', MARIA_DB_HOST
+     mariadb_connection = mariadb.connect(user=ENV_USER, password=ENV_PASS, database=ENV_DB, host=MARIA_DB_HOST)
      return mariadb_connection
 
 
