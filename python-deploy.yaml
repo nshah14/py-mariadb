@@ -40,6 +40,6 @@ spec:
               name: mysecret
               key: dbname 
         ports:
-        - containerPort: 80
+        - containerPort: 3306
         
         
