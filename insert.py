@@ -37,9 +37,12 @@ def insert_data( first_name, last_name):
    mariadb_connection = connect_maria_db()
    cursor = mariadb_connection.cursor()
    cursor.execute("INSERT INTO employees (first_name, last_name) VALUES (%s, %s) ", (first_name, last_name))
+   
    mariadb_connection.commit()
+   print 'inserted data'
    cursor.close()
    mariadb_connection.close()
+   print 'cursor and connection closed' 
 
 def create_table():
    mariadb_connection = connect_maria_db()
