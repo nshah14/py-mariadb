@@ -1,35 +1,13 @@
-apiVersion: v1
-kind: Service
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: py-maria
+  name: job-insertion
 spec:
-  selector:
-    tier: frontend
-    app: mariadb
-  clusterIP: None
----
-apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
-kind: Deployment
-metadata:
-  name: py-maria
-spec:
-  selector:
-    matchLabels:
-      tier: frontend
-      app: mariadb
-  strategy:
-    type: Recreate
-  template:    
-    metadata:
-      labels:
-        tier: frontend
-        app: mariadb
+  template:
     spec:
-      restartPolicy: Never
       containers:
-      - image: shahnavedali/valley:5.0
-        name: py-maria
-        
+      - name: job-insertion
+        image: shahnavedali/valley:5.0
         env:
         - name: MARIA_DB_HOST
           value: mariadb
@@ -53,7 +31,5 @@ spec:
             secretKeyRef:
               name: mysecret
               key: dbname 
-        ports:
-        - containerPort: 3306
-        
-        
+      restartPolicy: Never
+  backoffLimit: 4
