@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: py-maria
+  labels:
+    tier: frontend
+    app: mariadb
+spec:
+  selector:
+    tier: frontend
+    app: mariadb
+  clusterIP: None
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: py-maria
+  labels:
+    tier: frontend
+    app: mariadb
+spec:
+  selector:
+    matchLabels:
+      tier: frontend
+      app: mariadb
+  strategy:
+    type: Recreate
+
+---
+apiVersion: batch/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Job
+metadata:
+  name: py-maria
+  labels:
+    tier: frontend
+    app: mariadb
+spec:
+  selector:
+    matchLabels:
+      tier: frontend
+      app: mariadb
+    containers:
+      - image: shahnavedali/valley:5.0
+        name: py-maria
+        restartPolicy: never
+        env:
+        - name: MARIA_DB_HOST
+          value: mariadb
+        - name: ENV_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: username 
+        - name: ENV_DB
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: dbname  
+        - name: ENV_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: username
+        - name: MYSQL_DB
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: dbname 
+        ports:
+        - containerPort: 3306
+        
+        
