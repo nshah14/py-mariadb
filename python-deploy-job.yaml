@@ -19,17 +19,17 @@ spec:
       app: mariadb
   strategy:
     type: Recreate
-  template:
-    kind: Job
+  template:    
     metadata:
       labels:
         tier: frontend
         app: mariadb
     spec:
+      restartPolicy: Never
       containers:
       - image: shahnavedali/valley:5.0
         name: py-maria
-        restartPolicy: Never
+        
         env:
         - name: MARIA_DB_HOST
           value: mariadb
