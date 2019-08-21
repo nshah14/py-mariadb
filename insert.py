@@ -38,12 +38,14 @@ def insert_data( first_name, last_name):
    cursor = mariadb_connection.cursor()
    cursor.execute("INSERT INTO employees (first_name, last_name) VALUES (%s, %s) ", (first_name, last_name))
    mariadb_connection.commit()
+   cursor.close()
+   mariadb_connection.close()
 
 def create_table():
    mariadb_connection = connect_maria_db()
    cursor = mariadb_connection.cursor()
    cursor.execute("CREATE TABLE employees (first_name VARCHAR(255), last_name VARCHAR(255))")
-
+   
 
 
 
