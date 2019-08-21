@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: py-maria
 spec:
-  ports:
-  - port: 3306
   selector:
     tier: frontend
     app: mariadb
