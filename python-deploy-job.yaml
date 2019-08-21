@@ -2,9 +2,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: py-maria
-  labels:
-    tier: frontend
-    app: mariadb
 spec:
   selector:
     tier: frontend
@@ -15,9 +12,6 @@ apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
   name: py-maria
-  labels:
-    tier: frontend
-    app: mariadb
 spec:
   selector:
     matchLabels:
@@ -25,24 +19,17 @@ spec:
       app: mariadb
   strategy:
     type: Recreate
-
----
-apiVersion: batch/v1 # for versions before 1.9.0 use apps/v1beta2
-kind: Job
-metadata:
-  name: py-maria
-  labels:
-    tier: frontend
-    app: mariadb
-spec:
-  selector:
-    matchLabels:
-      tier: frontend
-      app: mariadb
-    containers:
+  template:
+    kind: Job
+    metadata:
+      labels:
+        tier: frontend
+        app: mariadb
+    spec:
+      containers:
       - image: shahnavedali/valley:5.0
         name: py-maria
-        restartPolicy: never
+        restartPolicy: Never
         env:
         - name: MARIA_DB_HOST
           value: mariadb
