@@ -48,6 +48,10 @@ def create_table():
 
 
 def connect_maria_db():
+     print ' environment variable'
+     print 'ENV_USER ', ENV_USER
+     print 'ENV_PASS ', ENV_PASS
+     print 'ENV_DB', ENV_DB
      mariadb_connection = mariadb.connect(user=ENV_USER, password=ENV_PASS, database=ENV_DB)
      return mariadb_connection
 
