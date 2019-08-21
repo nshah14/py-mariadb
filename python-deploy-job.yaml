@@ -8,6 +8,8 @@ spec:
       containers:
       - name: job-insertion
         image: shahnavedali/valley:5.0
+        command: ["python"]
+        args: [ "insert.py", "-i", "alhan", "-o" , "naved"]
         env:
         - name: MARIA_DB_HOST
           value: mariadb
