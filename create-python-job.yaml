@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: job-creation
-        image: shahnavedali/create:3.0
+        image: shahnavedali/create:4.0
         env:
         - name: MARIA_DB_HOST
           value: mariadb

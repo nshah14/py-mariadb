@@ -17,7 +17,7 @@ def main(argv):
 
 
 def create_DB():
-    mariadb_connection = connect_maria_db()
+    mariadb_connection = mariadb.connect(user=ENV_USER, password=ENV_PASS, host=MARIA_DB_HOST)
     cursor = mariadb_connection.cursor()
     cursor.execute(CREATE_DB_QUERY)
     print ' executed query :  '
