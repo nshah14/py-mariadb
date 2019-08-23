@@ -1,15 +1,13 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: job-insertion
+  name: job-creation
 spec:
   template:
     spec:
       containers:
-      - name: job-insertion
-        image: shahnavedali/valley:5.0
-        command: ["python"]
-        args: [ "insert.py", "-i", "alhan", "-o" , "naved"]
+      - name: job-creation
+        image: shahnavedali/create:1.0
         env:
         - name: MARIA_DB_HOST
           value: mariadb

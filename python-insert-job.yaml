@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-insertion
+spec:
+  template:
+    spec:
+      containers:
+      - name: job-insertion
+        image: shahnavedali/insert:1.0
+        command: ["python"]
+        args: [ "insert.py", "-i", "alhan", "-o" , "naved"]
+        env:
+        - name: MARIA_DB_HOST
+          value: mariadb
+        - name: ENV_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: username 
+        - name: ENV_DB
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: dbname  
+        - name: ENV_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: username
+        - name: MYSQL_DB
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: dbname 
+      restartPolicy: Never
+  backoffLimit: 4
