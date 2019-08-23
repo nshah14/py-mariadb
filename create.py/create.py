@@ -21,20 +21,20 @@ def create_DB():
     cursor = mariadb_connection.cursor()
     cursor.execute(CREATE_DB_QUERY)
     print ' executed query :  '
-    closeConnection(mariadb_connection)
+    print 'executed query '
+    mariadb_connection.cursor().close()
+    mariadb_connection.close()
+    print 'cursor and connection closed' 
+
 
 def create_table():
    mariadb_connection = connect_maria_db()
    cursor = mariadb_connection.cursor()
    cursor.execute(CREATE_TABLE_QUERY)
-   closeConnection(mariadb_connection)
-
-
-def closeConnection(mariadb_connection)
-    print 'executed query '
-    mariadb_connection.cursor().close()
-    mariadb_connection.close()
-    print 'cursor and connection closed' 
+   print 'executed query '
+   mariadb_connection.cursor().close()
+   mariadb_connection.close()
+   print 'cursor and connection closed' 
 
 def connect_maria_db():
      print ' environment variable'
